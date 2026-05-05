@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Современный портал о боксе</title>
+    <!-- Google Fonts & простой reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0c10;
+            color: #eef2ff;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* градиентные акценты */
+        :root {
+            --brand-red: #e11d48;
+            --brand-red-dark: #be123c;
+            --brand-gold: #facc15;
+            --dark-bg: #0a0c10;
+            --card-bg: #111317;
+            --border-dim: #1f2229;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* header */
+        .header {
+            background: rgba(10, 12, 16, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-dim);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff, var(--brand-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo span {
+            color: var(--brand-red);
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+        }
+        .nav-links a {
+            color: #cdd6f4;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: var(--brand-red);
+        }
+
+        /* hero */
+        .hero {
+            padding: 80px 0 100px;
+            background: radial-gradient(circle at 20% 30%, #141824, #050608);
+            border-bottom: 1px solid var(--border-dim);
+        }
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .hero-text {
+            flex: 1;
+        }
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #ffffff, #facc15);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #a3b3d6;
+            max-width: 550px;
+            margin-bottom: 32px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--brand-red);
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+        }
+        .btn:hover {
+            background-color: var(--brand-red-dark);
+            transform: translateY(-2px);
+        }
+        .hero-stats {
+            flex: 1;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            background: rgba(17, 19, 23, 0.6);
+            backdrop-filter: blur(4px);
+            padding: 32px;
+            border-radius: 48px;
+            border: 1px solid rgba(225, 29, 72, 0.3);
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--brand-gold);
+        }
+
+        /* card section */
+        .section {
+            padding: 80px 0;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 48px;
+            border-left: 5px solid var(--brand-red);
+            padding-left: 20px;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 28px;
+            border: 1px solid var(--border-dim);
+            transition: all 0.25s ease;
+        }
+        .card:hover {
+            border-color: var(--brand-red);
+            transform: translateY(-5px);
+        }
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+        }
+        .card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+        }
+        .card p {
+            color: #9ca3af;
+            margin-bottom: 20px;
+        }
+        .tag {
+            display: inline-block;
+            background: rgba(225, 29, 72, 0.2);
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #fda4af;
+        }
+
+        /* таблица рейтингов */
+        .rankings {
+            background: #0e1015;
+            border-radius: 32px;
+            overflow-x: auto;
+        }
+        .rank-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .rank-table th, .rank-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border-dim);
+        }
+        .rank-table th {
+            font-weight: 600;
+            color: var(--brand-gold);
+            font-size: 0.9rem;
+        }
+        .rank-table tr:last-child td {
+            border-bottom: none;
+        }
+        .weight-badge {
+            background: #1e222c;
+            padding: 5px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;            
+        }
+
+        /* цитата */
+        .quote-block {
+            background: linear-gradient(135deg, #111317, #0b0d12);
+            border-radius: 48px;
+            padding: 56px 38px;
+            text-align: center;
+            border: 1px solid rgba(225, 29, 72, 0.4);
+            margin-top: 40px;
+        }
+        .quote-text {
+            font-size: 1.8rem;
+            font-weight: 500;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: #f1f5f9;
+        }
+        .quote-author {
+            color: var(--brand-gold);
+            font-weight: 600;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-dim);
+            padding: 48px 0 32px;
+            background: #07090e;
+        }
+        .footer-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .footer-copy {
+            color: #6c727f;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 760px) {
+            .hero-text h1 {
+                font-size: 2.3rem;
+            }
+            .hero-stats {
+                flex-wrap: wrap;
+                padding: 24px;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .quote-text {
+                font-size: 1.3rem;
+            }
+        }
+        button {
+            background: none;
+            border: none;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="nav">
+            <div class="logo"><span></span> <span></span></div>
+            <div class="nav-links">
+                <a href="#">Главная</a>
+                <a href="#fighters">Бойцы</a>
+                <a href="#rankings">Рейтинги</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1>Искусство удара.<br>Дух чемпионов.</h1>
+                <p>Бокс — это дисциплина, стратегия и воля. Актуальные бои, рейтинги P4P и аналитика.</p>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">17</div>
+                    <div>весовых категорий</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4</div>
+                    <div>основных санкционных тела</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3000+</div>
+                    <div>профессиональных бойцов</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- раздел стили / фишки бокса -->
+    <div class="container" id="fighters">
+        <div class="section">
+            <h2 class="section-title">Стили и школы бокса</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">🇺🇸</div>
+                    <h3>Американская школа</h3>
+                    <p>Атлетизм, джеб, подвижность. Легенды: Мухаммед Али, Шугар Рэй Робинсон, Флойд Мейвезер.</p>
+                    <span class="tag">#аутфайтинг</span>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🇲🇽</div>
+                    <h3>Мексиканская школа</h3>
+                    <p>Прессинг, удары по корпусу, железный подбородок. Хулио Сесар Чавес, Канело Альварес, Сальвадор Санчес.</p>
+                    <span class="tag">#инфайтинг</span>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🇪🇺</div>
+                    <h3>Европейский бокс</h3>
+                    <p>Тактика, работа на ногах, великолепная защита. Владимир Кличко, Леннокс Льюис, Карл Фроч.</p>
+                    <span class="tag">#футворк</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Рейтинговая таблица P4P и весовые категории -->
+    <div class="container" id="rankings">
+        <div class="section">
+            <h2 class="section-title">Рейтинг Pound-for-Pound (P4P)</h2>
+            <div class="rankings">
+                <table class="rank-table">
+                    <thead>
+                        <tr><th>Позиция</th><th>Боксер</th><th>Рекорд</th><th>Весовая категория</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>🥇 1</td><td><strong>Теренс Кроуфорд</strong></td><td>40-0 (31 KO)</td><td><span class="weight-badge">Полусредний вес</span></td></tr>
+                        <tr><td>🥈 2</td><td><strong>Наоя Иноуэ</strong></td><td>26-0 (23 KO)</td><td><span class="weight-badge">Легчайший вес</span></td></tr>
+                        <tr><td>🥉 3</td><td><strong>Александр Усик</strong></td><td>21-0 (14 KO)</td><td><span class="weight-badge">Тяжелый вес</span></td></tr>
+                        <tr><td>4</td><td><strong>Сауль 'Канело' Альварес</strong></td><td>60-2-2 (39 KO)</td><td><span class="weight-badge">Полутяжелый / второй средний</span></td></tr>
+                        <tr><td>5</td><td><strong>Эррол Спенс</strong></td><td>28-1 (22 KO)</td><td><span class="weight-badge">Полусредний вес</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 40px;">
+                <h2 class="section-title">📊 Легендарные весовые категории</h2>
+                <div class="cards">
+                    <div class="card"><h3>Тяжелый вес 💥</h3><p>Али, Фрейзер, Фореман, Тайсон, Джошуа, Фьюри, Усик — нокаутирующая мощь и зрелищность.</p></div>
+                    <div class="card"><h3>Полусредний вес ⚡</h3><p>Мейвезер, Пакьяо, Кроуфорд, Хирн — скорость + тактика.</p></div>
+                    <div class="card"><h3>Средний вес 🎯</h3><p>Хаглер, Леонард, Хирнс, Головкин — 'золотая эра'.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Цитата великого тренера -->
+    <div class="container">
+        <div class="quote-block">
+            <div class="quote-text">«Бокс — это не про то, как сильно ты ударишь, а про то, какой удар сможешь выдержать и продолжить идти вперёд».</div>
+            <div class="quote-author">— Майк Тайсон (легенда тяжелого веса)</div>
+        </div>
+    </div>
+
+    <!-- Секция знаменитых боев / предстоящие -->
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">🎬 Топ-3 боя десятилетия (по версии редакции)</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>🥊 Фьюри — Уайлдер III</h3>
+                    <p>Один из величайших триллеров в супертяжах: 4 нокдауна, 10-й раунд и легендарный финиш.</p>
+                    <span class="tag">#бойгода</span>
+                </div>
+                <div class="card">
+                    <h3>🥊 Канело vs Головкин II</h3>
+                    <p>Тактический шедевр, спорное решение, но уровень бокса высочайший — 24 раунда напряжения.</p>
+                    <span class="tag">#среднийвес</span>
+                </div>
+                <div class="card">
+                    <h3>🥊 Джошуа — Усик I</h3>
+                    <p>Мастер-класс от Усика: переиграл более крупного чемпиона на чужой территории.</p>
+                    <span class="tag">#апсет</span>
+                </div>
